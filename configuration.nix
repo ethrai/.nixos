@@ -92,9 +92,9 @@
   stylix.enable = true;
   stylix.autoEnable = true;
   stylix.homeManagerIntegration.autoImport = true;
-  stylix.base16Scheme =
-    "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
   stylix.polarity = "dark";
+  stylix.targets.chromium.enable = true;
 
   stylix.image = /home/sergio/Downloads/nice.png;
 
