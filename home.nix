@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -20,11 +25,13 @@
       };
     };
 
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = "${pkgs.nixfmt}/bin/nixfmt-rfc-style";
-    }];
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+      }
+    ];
   };
 
   programs.chromium = {
@@ -35,10 +42,16 @@
     ];
   };
 
-  programs.btop = { enable = true; };
+  programs.btop = {
+    enable = true;
+  };
 
   home.packages = with pkgs; [
+    nautilus
+    nixfmt-rfc-style
     rofi-wayland
+    cliphist
+    wl-clipboard
     hyprpaper
     hyprlock
     hypridle
@@ -65,8 +78,6 @@
   ];
 
   home.stateVersion = "24.05"; # Please read the comment before changing.
-
-  qt = { enable = true; };
 
   home.file = { };
 
@@ -107,8 +118,6 @@
   };
   services.dunst.enable = true;
 
-  # Let Home Manager install and manage itself.
-
   programs.home-manager.enable = true;
   programs.fish.enable = true;
   programs.rofi = {
@@ -132,12 +141,20 @@
         # output = [ "eDP-1" ];
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right = [ "tray" "temperature" "cpu" "memory" "battery" ];
+        modules-right = [
+          "tray"
+          "temperature"
+          "cpu"
+          "memory"
+          "battery"
+        ];
       };
     };
   };
 
-  programs.kitty = { enable = true; };
+  programs.kitty = {
+    enable = true;
+  };
   programs.tmux = {
     enable = true;
     keyMode = "vi";
@@ -153,26 +170,30 @@
         no_fade_in = false;
       };
 
-      background = [{
-        path = "~/Downloads/nice.png";
-        blur_passes = 3;
-        blur_size = 8;
-      }];
+      background = [
+        {
+          path = "~/Downloads/nice.png";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
 
-      input-field = [{
-        size = "200, 50";
-        position = "0, -80";
-        monitor = "";
-        dots_center = true;
-        fade_on_empty = false;
-        font_color = "rgb(202, 211, 245)";
-        inner_color = "rgb(91, 96, 120)";
-        outer_color = "rgb(24, 25, 38)";
-        outline_thickness = 5;
-        placeholder_text = ''<span foreground="##cad3f5">Password...</span>'';
+      input-field = [
+        {
+          size = "200, 50";
+          position = "0, -80";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+          placeholder_text = ''<span foreground="##cad3f5">Password...</span>'';
 
-        shadow_passes = 2;
-      }];
+          shadow_passes = 2;
+        }
+      ];
     };
   };
 }
