@@ -73,7 +73,6 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
   services.thermald.enable = true;
   services.tlp = { enable = true; };
@@ -92,15 +91,15 @@
   stylix.enable = true;
   stylix.autoEnable = true;
   stylix.homeManagerIntegration.autoImport = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
-  stylix.polarity = "dark";
-  stylix.targets.chromium.enable = true;
+  stylix.base16Scheme =
+    "${pkgs.base16-schemes}/share/themes/default-light.yaml";
+  stylix.targets.chromium.enable = false;
 
   stylix.image = /home/sergio/Downloads/nice.png;
 
   stylix.cursor.package = pkgs.bibata-cursors;
   stylix.cursor.name = "Bibata-Modern-Ice";
-  stylix.cursor.size = 24;
+  stylix.cursor.size = 20;
 
   stylix.fonts = {
     monospace = {
@@ -121,10 +120,10 @@
     };
 
     sizes = {
-      desktop = 14;
-      applications = 14;
-      popups = 14;
-      terminal = 14;
+      desktop = 13;
+      applications = 13;
+      popups = 13;
+      terminal = 13;
     };
   };
 
