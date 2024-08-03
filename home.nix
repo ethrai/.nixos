@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 
@@ -11,13 +12,16 @@
   home.username = "sergio";
   home.homeDirectory = "/home/sergio";
 
-  imports = [ ./hyprland.nix ];
+  imports = [
+    ./hyprland.nix
+    ./development.nix
+  ];
 
   programs.helix = {
     enable = true;
     defaultEditor = true;
     settings = {
-      theme = lib.mkForce "solarized_light";
+      theme = lib.mkForce "nord_light";
       editor.cursor-shape = {
         normal = "block";
         insert = "bar";
@@ -47,7 +51,10 @@
   };
 
   home.packages = with pkgs; [
+    wlsunset
     nautilus
+    obsidian
+
     nixfmt-rfc-style
     rofi-wayland
     cliphist

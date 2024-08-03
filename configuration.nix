@@ -21,6 +21,14 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   security.polkit.enable = true;
   security.pam.services.hyprlock = { };
 
@@ -72,7 +80,8 @@
 
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    # package = inputs.hyprland.packages."${pkgs.sytsem}".hyprland;
+    # xwayland.enable = true;
   };
   # ...
 
@@ -101,13 +110,13 @@
   stylix.enable = true;
   stylix.autoEnable = true;
   stylix.homeManagerIntegration.autoImport = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/solarized-light.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/nord-light.yaml";
   stylix.targets.chromium.enable = false;
 
   stylix.image = /home/sergio/Downloads/nice.png;
 
   stylix.cursor.package = pkgs.bibata-cursors;
-  stylix.cursor.name = "Bibata-Modern-Ice";
+  stylix.cursor.name = "Bibata-Modern-Amber";
   stylix.cursor.size = 20;
 
   stylix.fonts = {
@@ -129,9 +138,9 @@
     };
 
     sizes = {
-      desktop = 13;
-      applications = 13;
-      popups = 13;
+      desktop = 12;
+      applications = 12;
+      popups = 12;
       terminal = 13;
     };
   };
@@ -146,6 +155,7 @@
       "input"
       "networkmanager"
       "video"
+      "docker"
     ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [ ];

@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 
@@ -9,13 +10,19 @@
   config = {
     wayland.windowManager.hyprland = {
       enable = true;
+      systemd.enable = true;
+      # plugins = [ inputs.hy3.packages.x86-64-linux.hy3 ];
 
       settings = {
+        monitor = "eDP-1,1920x1200,0x0,1.25";
         "$mod" = "SUPER";
         "$term" = "kitty";
+        "$browser" = "chromium";
         exec-once = [
           "wl-paste --type text --watch cliphist store"
           "wl-paste --type image --watch cliphist store"
+          "$term"
+          "$browser"
         ];
         bind = [
           "$mod, R, exec, rofi -show drun"
@@ -118,7 +125,7 @@
           gaps_in = 0;
           gaps_out = 0;
           allow_tearing = false;
-          border_size = 1;
+          border_size = 0;
         };
 
         input = {
@@ -145,8 +152,8 @@
           name = "tpps/2-elan-trackpoint";
           sensitivity = -0.5;
         };
+
       };
     };
-
   };
 }
