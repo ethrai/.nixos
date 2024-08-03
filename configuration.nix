@@ -1,4 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -6,10 +12,8 @@
     #     inputs.home-manager.nixosModules.default
   ];
 
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
-
   boot = {
+    initrd.kernelModules = [ "i915" ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -21,10 +25,12 @@
   security.pam.services.hyprlock = { };
 
   networking.hostName = "caladan"; # Define your hostname.
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   time.timeZone = "Europe/Minsk";
@@ -32,7 +38,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    # earlySetup = true;
+    earlySetup = true;
     packages = [ pkgs.terminus_font ];
     font = "ter-124b";
     useXkbConfig = true;
@@ -56,8 +62,10 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals =
-      [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
   };
 
   hardware.bluetooth.enable = true;
@@ -75,7 +83,9 @@
 
   services.libinput.enable = true;
   services.thermald.enable = true;
-  services.tlp = { enable = true; };
+  services.tlp = {
+    enable = true;
+  };
   services.gnome.gnome-keyring.enable = true;
 
   fonts.packages = with pkgs; [
@@ -91,8 +101,7 @@
   stylix.enable = true;
   stylix.autoEnable = true;
   stylix.homeManagerIntegration.autoImport = true;
-  stylix.base16Scheme =
-    "${pkgs.base16-schemes}/share/themes/solarized-light.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/solarized-light.yaml";
   stylix.targets.chromium.enable = false;
 
   stylix.image = /home/sergio/Downloads/nice.png;
@@ -164,4 +173,3 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
-
