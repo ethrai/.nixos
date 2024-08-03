@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   config = {
@@ -8,6 +13,10 @@
       settings = {
         "$mod" = "SUPER";
         "$term" = "kitty";
+        exec-once = [
+          "wl-paste --type text --watch cliphist store"
+          "wl-paste --type image --watch cliphist store"
+        ];
         bind = [
           "$mod, R, exec, rofi -show drun"
           "$mod, W, exec, rofi -show window"
@@ -114,8 +123,7 @@
 
         input = {
           kb_layout = "us,ru";
-          kb_options =
-            "grp:alt_shift_toggle,caps:swapescape,grp:alt_space_toggle";
+          kb_options = "grp:alt_shift_toggle,caps:swapescape,grp:alt_space_toggle";
           repeat_rate = 35;
           repeat_delay = 175;
 
@@ -123,10 +131,16 @@
 
           sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
-          touchpad = { natural_scroll = false; };
+          touchpad = {
+            natural_scroll = false;
+          };
         };
-        gestures = { workspace_swipe = true; };
-        animations = { enabled = false; };
+        gestures = {
+          workspace_swipe = true;
+        };
+        animations = {
+          enabled = false;
+        };
         device = {
           name = "tpps/2-elan-trackpoint";
           sensitivity = -0.5;
