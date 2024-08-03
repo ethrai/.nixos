@@ -92,7 +92,7 @@
   stylix.autoEnable = true;
   stylix.homeManagerIntegration.autoImport = true;
   stylix.base16Scheme =
-    "${pkgs.base16-schemes}/share/themes/default-light.yaml";
+    "${pkgs.base16-schemes}/share/themes/solarized-light.yaml";
   stylix.targets.chromium.enable = false;
 
   stylix.image = /home/sergio/Downloads/nice.png;
