@@ -40,9 +40,9 @@
             ./configuration.nix
             home-manager.nixosModules.home-manager
             {
-              # home-manager.extraSpecialArgs = {
-              #   inherit inputs;
-              # };
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.sergio = import ./home.nix;
@@ -51,17 +51,6 @@
           ];
         };
 
-      };
-      homeConfigurations.caladan = home-manager.lib.homeManagerConfiguration {
-
-        modules = [
-          inputs.hyprland.homeManagerModules.default
-          {
-            wayland.windowManager.hyprland = {
-              plugins = [ inputs.hy3.packages.x86_64-linux.hy3 ];
-            };
-          }
-        ];
       };
     };
 }

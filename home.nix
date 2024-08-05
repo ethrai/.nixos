@@ -8,13 +8,23 @@
 
 {
   imports = [
-    ./hyprland.nix
-    ./development.nix
+    # ./hyprland.nix
+    # ./development.nix
   ];
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "sergio";
-  home.homeDirectory = "/home/sergio";
+
+  home = {
+    username = "sergio";
+    homeDirectory = "/home/sergio";
+  };
+
+  programs.git = {
+    enable = true;
+  };
+
+  config = {
+    allowUnfree = true;
+    allowUnfreePredicate = _: true;
+  };
 
   programs.chromium = {
     enable = true;
@@ -26,12 +36,6 @@
 
   programs.btop = {
     enable = true;
-  };
-
-  xdg.configFile = {
-    "tmux" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/.config/tmux/tmux.conf";
-    };
   };
 
   home.packages = with pkgs; [

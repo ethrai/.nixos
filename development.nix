@@ -1,8 +1,14 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 
 {
 
-  imports = [ ./tmux.nix ];
+  # imports = [ ./tmux.nix ];
 
   programs.helix = {
     enable = true;
