@@ -8,7 +8,11 @@
 
 {
 
-  # imports = [ ./tmux.nix ];
+  imports = [
+    ./tmux.nix
+    ./alacritty.nix
+    ./vscode.nix
+  ];
 
   programs.helix = {
     enable = true;
@@ -35,6 +39,7 @@
   programs.kitty.enable = true;
 
   home.packages = with pkgs; [
+
     alacritty
     kitty
     nixfmt-rfc-style
@@ -54,6 +59,7 @@
     nodejs_22
     cargo
     rustc
+    nil
 
     docker
   ];

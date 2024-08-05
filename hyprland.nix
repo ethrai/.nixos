@@ -17,6 +17,8 @@
         "wl-paste --type image --watch cliphist store"
         "$term"
         "$browser"
+        "waybar &
+"
       ];
       bind = [
         "$mod, R, exec, rofi -show drun"
@@ -124,7 +126,7 @@
 
       input = {
         kb_layout = "us,ru";
-        kb_options = "grp:alt_shift_toggle,caps:swapescape,grp:alt_space_toggle";
+        kb_options = "caps:swapescape,grp:alt_space_toggle";
         repeat_rate = 35;
         repeat_delay = 175;
 

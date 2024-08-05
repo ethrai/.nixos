@@ -8,8 +8,8 @@
 
 {
   imports = [
-    # ./hyprland.nix
-    # ./development.nix
+    ./hyprland.nix
+    ./development.nix
   ];
 
   home = {
@@ -21,9 +21,11 @@
     enable = true;
   };
 
-  config = {
-    allowUnfree = true;
-    allowUnfreePredicate = _: true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+    };
   };
 
   programs.chromium = {
@@ -42,6 +44,8 @@
     wlsunset
     nautilus
     obsidian
+
+    zoxide
 
     nixfmt-rfc-style
     rofi-wayland
@@ -78,6 +82,7 @@
     XDG_CURRENT_DESKTOP = "Hyprland";
     XDG_SESSION_TYPE = "wayland";
     XDG_SCREENSHOTS_DIR = "~/screens";
+    XDG_CONFIG_HOME = "/home/sergio/.config";
     QT_QPA_PLATFONM_THEME = "qt5ct";
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;

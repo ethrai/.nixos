@@ -1,15 +1,28 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  stylix,
+  ...
+}:
 
 {
+
+  stylix.targets.tmux.enable = true;
   programs.tmux = {
     enable = true;
+    package = pkgs.tmux;
     historyLimit = 100000;
     keyMode = "vi";
     escapeTime = 0;
     baseIndex = 1;
-    plugins = with pkgs; [ { plugin = tmuxPlugins.sensible; } ];
+    plugins = with pkgs; [
+      { plugin = tmuxPlugins.sensible; }
+      { plugin = tmuxPlugins.vim-tmux-navigator; }
+    ];
     extraConfig = ''
-      set-option -sa terminal-overrides ",xterm*:Tc"
+
+      set -g default-terminal "tmux-256color"
+      set -ag terminal-overrides ",xterm-256color:RGB"
       set -g mouse on
 
       set-option -g status-position bottom

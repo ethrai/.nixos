@@ -9,7 +9,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./development.nix
     #     inputs.home-manager.nixosModules.default
   ];
 
@@ -139,12 +138,14 @@
     };
 
     sizes = {
-      desktop = 12;
-      applications = 12;
-      popups = 12;
+      desktop = 13;
+      applications = 13;
+      popups = 13;
       terminal = 13;
     };
   };
+
+  programs.zsh.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sergio = {
@@ -160,17 +161,7 @@
     packages = with pkgs; [ ];
   };
 
-  # home-manager = {
-  #    extraSpecialArgs = { inherit inputs; };
-  #    users = { 
-  #        "sergio" = import ./home.nix;
-  #    };
-  # };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     helix
     wget
     git
@@ -179,6 +170,7 @@
     lm_sensors
 
   ];
-  system.stateVersion = "24.05"; # Did you read the comment?
+  # Do not touch
+  system.stateVersion = "24.05";
 
 }
