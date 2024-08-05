@@ -7,6 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
     hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -22,39 +23,45 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      stylix,
-      hyprland,
-      hy3,
-      ...
-    }:
+    { nixpkgs, home-manager, ... }@inputs:
     let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      packages.x86-64-linux.hello = nixpkgs.legacyPackages.x86-64-linux.hello;
-
-      packages.x86-64-linux.default = self.packages.x86-64-linux.hello;
 
       nixosConfigurations = {
         caladan = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
-            stylix.nixosModules.stylix
+            inputs.stylix.nixosModules.stylix
             ./configuration.nix
             home-manager.nixosModules.home-manager
             {
+              # home-manager.extraSpecialArgs = {
+              #   inherit inputs;
+              # };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.sergio = import ./home.nix;
-
             }
 
           ];
         };
 
+      };
+      homeConfigurations.caladan = home-manager.lib.homeManagerConfiguration {
+
+        modules = [
+          inputs.hyprland.homeManagerModules.default
+          {
+            wayland.windowManager.hyprland = {
+              plugins = [ inputs.hy3.packages.x86_64-linux.hy3 ];
+            };
+          }
+        ];
       };
     };
 }

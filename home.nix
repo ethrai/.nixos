@@ -7,36 +7,14 @@
 }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "sergio";
-  home.homeDirectory = "/home/sergio";
-
   imports = [
     ./hyprland.nix
     ./development.nix
   ];
-
-  programs.helix = {
-    enable = true;
-    defaultEditor = true;
-    settings = {
-      theme = lib.mkForce "nord_light";
-      editor.cursor-shape = {
-        normal = "block";
-        insert = "bar";
-        select = "underline";
-      };
-    };
-
-    languages.language = [
-      {
-        name = "nix";
-        auto-format = true;
-        formatter.command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
-      }
-    ];
-  };
+  # Home Manager needs a bit of information about you and the paths it should
+  # manage.
+  home.username = "sergio";
+  home.homeDirectory = "/home/sergio";
 
   programs.chromium = {
     enable = true;
@@ -48,6 +26,12 @@
 
   programs.btop = {
     enable = true;
+  };
+
+  xdg.configFile = {
+    "tmux" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/.config/tmux/tmux.conf";
+    };
   };
 
   home.packages = with pkgs; [
@@ -73,14 +57,11 @@
     gnome-keyring
     seahorse
     tree
-    kitty
     mpv
     fish
     chromium
     dunst
     btop
-    gh
-    neovim
     yt-dlp
   ];
 
@@ -157,14 +138,6 @@
         ];
       };
     };
-  };
-
-  programs.kitty = {
-    enable = true;
-  };
-  programs.tmux = {
-    enable = true;
-    keyMode = "vi";
   };
 
   programs.hyprlock = {
